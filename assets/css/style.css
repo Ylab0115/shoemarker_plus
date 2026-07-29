@@ -14541,6 +14541,25 @@ body.sheet-open {
     top: 10px;
   }
 }
+.product-card__label.hot {
+  background: #000000;
+}
+.product-card__label--group {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  width: calc(100% - 24px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.product-card__label--group .product-card__label {
+  position: relative;
+  top: 0;
+  left: 0;
+}
 .product-card__img {
   width: 100%;
   aspect-ratio: 1/1;

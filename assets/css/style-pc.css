@@ -13686,6 +13686,25 @@ body.sheet-open {
   border-radius: 20px;
   background: linear-gradient(39deg, #005BFF 31.31%, rgba(0, 133, 255, 0.76) 65.06%, rgba(62, 228, 175, 0.51) 101.68%, #3C95FD 157.92%);
 }
+.product-card__label.hot {
+  background: #000000;
+}
+.product-card__label--group {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  width: calc(100% - 24px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3px;
+  flex-wrap: wrap;
+}
+.product-card__label--group .product-card__label {
+  position: relative;
+  top: 0;
+  left: 0;
+}
 .product-card__img {
   width: 100%;
   aspect-ratio: 1/1;
