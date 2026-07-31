@@ -444,6 +444,22 @@ let UI = {
       });
     });
   },
+  // 기획전 상세페이지 탭 메뉴 활성화/비활성화
+  promoTabs: function () {
+    const $promoTabs = $('.promo-prod');
+    
+    if (!$promoTabs.length) return;
+
+    $promoTabs.each(function () {
+      const $tabBtns = $(this).find('.tab__list .tab__btn');
+
+      $tabBtns.on('click', function () {
+        console.log('fsdas');
+        $tabBtns.removeClass('is-active');
+        $(this).addClass('is-active');
+      });
+    });
+  },
   // 상품 상세 더보기 / 닫기
   prodInfoMore: function () {
     const $moreBtn = $('#prod-info-more-btn');
@@ -1167,6 +1183,7 @@ $(function () {
   UI.orderBlock();
   UI.textCount();
   UI.prodTabs();
+  UI.promoTabs();
   UI.prodInfoMore();
   UI.prodBenefit();
   UI.reviewSort();
