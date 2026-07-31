@@ -13490,12 +13490,21 @@ body.sheet-open {
   gap: 24px;
   width: 100%;
   padding: 16px 24px;
-  background: #000000;
+  background: #F8F8F8;
   flex-wrap: nowrap;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+.tab--bar .tab__list::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #D8D8D8;
 }
 .tab--bar .tab__list::-webkit-scrollbar {
   display: none;
@@ -13505,10 +13514,22 @@ body.sheet-open {
   width: -moz-fit-content;
   width: fit-content;
   padding: 0;
-  color: #D8D8D8;
+  color: #555555;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
+}
+.tab--bar .tab__btn.is-active {
+  color: #2D2D2D;
+}
+.tab--bar .tab__btn.is-active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -16px;
+  width: 100%;
+  height: 2px;
+  background-color: #2D2D2D;
 }
 
 .table-row {
@@ -21380,42 +21401,42 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
 }
 .order-form .payment-method__quick-icon--npay {
   background: url("../images/img_npay.png") no-repeat;
-  background-size: center center;
+  background-position: center center;
   background-size: contain;
 }
 .order-form .payment-method__quick-icon--kakaopay {
   background: url("../images/img_kakaopay.png") no-repeat;
-  background-size: center center;
+  background-position: center center;
   background-size: contain;
 }
 .order-form .payment-method__quick-icon--payco {
   background: url("../images/img_payco.png") no-repeat;
-  background-size: center center;
+  background-position: center center;
   background-size: contain;
 }
 .order-form .payment-method__quick-icon--toss {
   background: url("../images/img_toss.png") no-repeat;
-  background-size: center center;
+  background-position: center center;
   background-size: contain;
 }
 .order-form .payment-method__quick-icon--applepay {
   background: url("../images/img_applepay.png") no-repeat;
-  background-size: center center;
+  background-position: center center;
   background-size: contain;
 }
 .order-form .payment-method__quick-icon--samsung {
   background: url("../images/img_samsung.png") no-repeat;
-  background-size: center center;
+  background-position: center center;
   background-size: contain;
 }
 .order-form .payment-method__quick-icon--lpay {
   background: url("../images/img_lpay.png") no-repeat;
-  background-size: center center;
+  background-position: center center;
   background-size: contain;
 }
 .order-form .payment-method__quick-icon--shoemarkerpay {
   background: url("../images/img_shoemarker_pay.png") no-repeat;
-  background-size: center center;
+  background-position: center center;
   background-size: contain;
 }
 .order-form .payment-method__guide-link {
