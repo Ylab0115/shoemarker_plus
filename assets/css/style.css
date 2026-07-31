@@ -26267,7 +26267,7 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   }
 }
 .event-detail .promo-prod .tab__panels {
-  padding: 20px 0 0;
+  padding: 60px 0 0;
 }
 @media (max-width: 1024px) {
   .event-detail .promo-prod .tab__panels {
@@ -26275,20 +26275,32 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   }
 }
 .event-detail .promo-prod .tab__panel {
-  display: block;
-  scroll-margin-top: 152px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 40px;
+  scroll-margin-top: 172px;
 }
 @media (max-width: 1024px) {
   .event-detail .promo-prod .tab__panel {
-    scroll-margin-top: 138px;
+    gap: 24px;
+    scroll-margin-top: 158px;
   }
 }
 .event-detail .promo-prod .tab__panel + .tab__panel {
-  margin-top: 40px;
+  margin-top: 60px;
+}
+.event-detail .promo-prod__title {
+  font-size: 40px;
+  line-height: 150%;
+  font-weight: 700;
+  text-align: center;
 }
 @media (max-width: 1024px) {
-  .event-detail .promo-prod .tab__panel + .tab__panel {
-    margin-top: 32px;
+  .event-detail .promo-prod__title {
+    font-size: 18px;
+    line-height: 26px;
   }
 }
 .event-detail .promo-prod__content {

@@ -447,16 +447,57 @@ let UI = {
   // 기획전 상세페이지 탭 메뉴 활성화/비활성화
   promoTabs: function () {
     const $promoTabs = $('.promo-prod');
-    
+
     if (!$promoTabs.length) return;
 
-    $promoTabs.each(function () {
-      const $tabBtns = $(this).find('.tab__list .tab__btn');
+    $promoTabs.each(function (index) {
+      const $promoTab = $(this);
+      const $tabBtns = $promoTab.find('.tab__list .tab__btn');
+
+      const $panels = $tabBtns.map(function () {
+        const targetId = $(this).attr('href');
+
+        return targetId && targetId.charAt(0) === '#'
+          ? document.querySelector(targetId)
+          : null;
+      });
+
+      function setActiveTab($tabBtn) {
+        $tabBtns.removeClass('is-active');
+        $tabBtn.addClass('is-active');
+      }
 
       $tabBtns.on('click', function () {
-        $tabBtns.removeClass('is-active');
-        $(this).addClass('is-active');
+        setActiveTab($(this));
       });
+
+      function updateActiveTab() {
+        const activeOffset = window.innerHeight * 0.38; // 화면 상단에서 %로 표시, 1 = 100%
+        let activeIndex = 0;
+
+        $panels.each(function (panelIndex) {
+          if (this.getBoundingClientRect().top <= activeOffset) {
+            activeIndex = panelIndex;
+          }
+        });
+
+        setActiveTab($tabBtns.eq(activeIndex));
+      }
+
+      let ticking = false;
+
+      $(window).on(`scroll.promoTabs${index} resize.promoTabs${index}`, function () {
+        if (ticking) return;
+
+        window.requestAnimationFrame(function () {
+          updateActiveTab();
+          ticking = false;
+        });
+
+        ticking = true;
+      });
+
+      updateActiveTab();
     });
   },
   // 상품 상세 더보기 / 닫기
