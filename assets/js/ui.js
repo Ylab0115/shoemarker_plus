@@ -454,7 +454,6 @@ let UI = {
       const $tabBtns = $(this).find('.tab__list .tab__btn');
 
       $tabBtns.on('click', function () {
-        console.log('fsdas');
         $tabBtns.removeClass('is-active');
         $(this).addClass('is-active');
       });
