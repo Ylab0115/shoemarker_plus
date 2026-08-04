@@ -16598,7 +16598,7 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
 .main .ai-chat {
   position: absolute;
   left: 24px;
-  bottom: 135px;
+  bottom: 185px;
   z-index: 1;
 }
 .main .ai-chat__icon-wrap {
@@ -16610,6 +16610,54 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
 }
 .main .ai-chat__label {
   font-size: 12px;
+}
+.main .scroll-to-discover {
+  position: absolute;
+  left: 50%;
+  bottom: 94px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1;
+}
+.main .scroll-to-discover__icon {
+  display: block;
+  width: 24px;
+  height: 24px;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+.main .scroll-to-discover__icon img {
+  width: 100%;
+  height: 100%;
+  animation: scroll-to-discover-floatY 1.35s ease-in-out infinite;
+}
+.main .scroll-to-discover__label {
+  color: #FFFFFF;
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 140%;
+  opacity: 0.7;
+}
+@keyframes scroll-to-discover-floatY {
+  0% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+  65% {
+    transform: translateY(3px);
+    opacity: 1;
+  }
+  95% {
+    transform: translateY(3px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(3px);
+    opacity: 0;
+  }
 }
 .main .trend__tabs {
   display: flex;
