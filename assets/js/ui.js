@@ -332,7 +332,7 @@ let UI = {
         lastScrollTop = scrollTop;
         
       });
-    } else if($ctawrap.length) {
+    } else if($ctawrap.length && $ctawrap.css('display') !== 'none') {
       // cta 체크 후 높이 만큼 bottom 값 추가
       const ctaHeight = $ctawrap.outerHeight();
       const currentBottom = parseFloat($floatwrap.css('bottom')) || 0;
