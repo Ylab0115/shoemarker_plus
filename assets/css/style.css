@@ -15704,10 +15704,6 @@ input[type=radio] {
 .floating-btns.is-up:not(.is-top) {
   bottom: 98px;
 }
-.floating-btns.is-top {
-  opacity: 0;
-  transform: translateY(100%);
-}
 
 main .ai-chat .ai-chat__trigger {
   width: 136px;
