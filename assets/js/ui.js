@@ -116,7 +116,7 @@ let UI = {
     });
 
     // dim 클릭 닫기
-    $(document).on('click', '.bottom-sheet__dim', function () {
+    $(document).on('click', '.bottom-sheet__dim, .bottom-sheet__indicator', function () {
       closeSheet($(this).closest('.bottom-sheet'));
     });
 
@@ -281,47 +281,63 @@ let UI = {
     const $win = $(window);
     const $tabbar = $('.tabbar');
     const $floatwrap = $('.floating-btns');
+    const $ctawrap = $('.cta');
     let lastScrollTop = 0;
     const threshold = 5;
     const bottomOffset = 10;
 
-    if (!$tabbar.length) return;
+    if ($tabbar.length) {
 
-    $win.on('scroll', function () {
-      const rawScrollTop = $win.scrollTop();
-      const windowHeight = $win.height();
-      const documentHeight = $(document).height();
-      const maxScrollTop = documentHeight - windowHeight;
-      const scrollTop = Math.max(0, Math.min(rawScrollTop, maxScrollTop));
+      $win.on('scroll', function () {
+        const rawScrollTop = $win.scrollTop();
+        const windowHeight = $win.height();
+        const documentHeight = $(document).height();
+        const maxScrollTop = documentHeight - windowHeight;
+        const scrollTop = Math.max(0, Math.min(rawScrollTop, maxScrollTop));
 
-      if (scrollTop <= 0) {
-        $tabbar.removeClass('is-hidden');
-        $floatwrap.addClass('is-up');
-        lastScrollTop = 0;
-        return;
-      }
+        if (scrollTop <= 0) {
+          $tabbar.removeClass('is-hidden');
+          if ($tabbar.css('display') !== 'none') {
+            $floatwrap.addClass('is-up');
+          }
+          lastScrollTop = 0;
+          return;
+        }
 
-      if (scrollTop >= maxScrollTop - bottomOffset) {
-        $tabbar.addClass('is-hidden');
-        $floatwrap.removeClass('is-up');
+        if (scrollTop >= maxScrollTop - bottomOffset) {
+          $tabbar.addClass('is-hidden');
+          if ($tabbar.css('display') !== 'none') {
+            $floatwrap.removeClass('is-up');
+          }
+          lastScrollTop = scrollTop;
+          return;
+        }
+
+        if (Math.abs(scrollTop - lastScrollTop) <= threshold) {
+          return;
+        }
+
+        if (scrollTop > lastScrollTop) {
+          $tabbar.addClass('is-hidden');
+          if ($tabbar.css('display') !== 'none') {
+            $floatwrap.removeClass('is-up');
+          }
+        } else {
+          $tabbar.removeClass('is-hidden');
+          if ($tabbar.css('display') !== 'none') {
+            $floatwrap.addClass('is-up');
+          }
+        }
+
         lastScrollTop = scrollTop;
-        return;
-      }
-
-      if (Math.abs(scrollTop - lastScrollTop) <= threshold) {
-        return;
-      }
-
-      if (scrollTop > lastScrollTop) {
-        $tabbar.addClass('is-hidden');
-         $floatwrap.removeClass('is-up');
-      } else {
-        $tabbar.removeClass('is-hidden');
-        $floatwrap.addClass('is-up');
-      }
-
-      lastScrollTop = scrollTop;
-    });
+        
+      });
+    } else if($ctawrap.length) {
+      // cta 체크 후 높이 만큼 bottom 값 추가
+      const ctaHeight = $ctawrap.outerHeight();
+      const currentBottom = parseFloat($floatwrap.css('bottom')) || 0;
+      $floatwrap.css('bottom', currentBottom + ctaHeight);
+    }
   },
   // order detail accordion
   orderBlock: function () {
@@ -413,7 +429,7 @@ let UI = {
 
       const tabsHeight = $prodTabs.outerHeight();
       const headerHeight = $('.section__header').outerHeight() || 0;
-      const targetTop = $target.offset().top - tabsHeight - headerHeight;
+      const targetTop = Math.ceil($target.offset().top - tabsHeight - headerHeight);
 
       $('html, body').scrollTop(targetTop);
     });

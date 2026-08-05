@@ -372,64 +372,64 @@
           <h2 class="section__title">best & hot brand</h2>
           <div class="best-hot">
             <!-- 브랜드 네비게이션 -->
-            <div class="best-hot__nav">
-              <ul class="best-hot__nav-list">
-                <li class="best-hot__nav-item is-active">
+            <div class="best-hot__nav swiper">
+              <ul class="best-hot__nav-list swiper-wrapper">
+                <li class="best-hot__nav-item swiper-slide is-active">
                   <button class="best-hot__nav-btn is-active" type="button" data-brand="nike">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_nike_pc.png" alt="Nike">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="adidas">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_adidas_pc.png" alt="Adidas">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="new-balance">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_newbalance_pc.png" alt="New Balance">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="reebok">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_reebok_pc.png" alt="Reebok">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="fila">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_fila_pc.png" alt="Fila">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="converse">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_converse_pc.png" alt="Converse">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="nike">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_nike_pc.png" alt="Nike">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="adidas">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_adidas_pc.png" alt="Adidas">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="new-balance">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_newbalance_pc.png" alt="New Balance">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="reebok">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_reebok_pc.png" alt="Reebok">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="fila">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_fila_pc.png" alt="Fila">
                   </button>
                 </li>
-                <li class="best-hot__nav-item">
+                <li class="best-hot__nav-item swiper-slide">
                   <button class="best-hot__nav-btn" type="button" data-brand="converse">
                     <img class="best-hot__nav-logo" src="../../assets/images/main/logo_converse_pc.png" alt="Converse">
                   </button>
@@ -2079,6 +2079,13 @@
           const navBtns = bestHotEl.querySelectorAll('.best-hot__nav-btn');
           const sliders = bestHotEl.querySelectorAll('.best-hot__slider');
 
+          const navWrapSwiper = new Swiper('.best-hot__nav', {
+            loop: false,
+            speed: 400,
+            slidesPerView: 7.9,
+            spaceBetween: 80,
+          });
+
           const brandSwipers = [];
           sliders.forEach(function (sliderEl) {
             const swiper = new Swiper(sliderEl, {
@@ -2117,6 +2124,48 @@
               brandSwipers[index].update();
             });
           });
+
+
+          /*const navList = bestHotEl.querySelector('.best-hot__nav-list');
+          if (navList) {
+            let isPointerDown = false;
+            let startX = 0;
+            let startScrollLeft = 0;
+            let suppressClick = false;
+
+            navList.addEventListener('pointerdown', function (e) {
+              isPointerDown = true;
+              startX = e.clientX;
+              startScrollLeft = navList.scrollLeft;
+              suppressClick = false;
+
+              navList.classList.add('is-dragging');
+            });
+
+            document.addEventListener('pointermove', function (e) {
+              if (!isPointerDown) return;
+
+              const moveX = e.clientX - startX;
+
+              if (Math.abs(moveX) > 5) {
+                suppressClick = true;
+                navList.scrollLeft = startScrollLeft - moveX;
+              }
+            });
+
+            document.addEventListener('pointerup', function () {
+              isPointerDown = false;
+              navList.classList.remove('is-dragging');
+            });
+
+            navList.addEventListener('click', function (e) {
+              if (!suppressClick) return;
+
+              e.preventDefault();
+              e.stopPropagation();
+              suppressClick = false;
+            });
+          }*/
         }
 
         // hot deal 상품 슬라이드

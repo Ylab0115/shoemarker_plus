@@ -11399,7 +11399,7 @@ img, video, canvas, svg {
   position: absolute;
   top: calc(100% + 20px);
   right: 0;
-  width: 143px;
+  width: 174px;
   padding: 12px;
   border-radius: 6px;
   border: 1px solid #2D2D2D;
@@ -11461,7 +11461,7 @@ img, video, canvas, svg {
   }
 }
 .brand-dropdown__item {
-  height: 18px;
+  height: 21px;
 }
 @media (max-width: 1024px) {
   .brand-dropdown__item {
@@ -15695,17 +15695,16 @@ input[type=radio] {
   position: fixed;
   right: 20px;
   bottom: 20px;
-  z-index: 2;
+  z-index: 40;
   display: inline-flex;
   flex-direction: column;
   gap: 8px;
   transition: transform 0.5s ease, bottom 0.5s ease;
 }
-
-.home.mo .floating-btns.is-up:not(.is-top) {
+.floating-btns.is-up:not(.is-top) {
   bottom: 98px;
 }
-.home.mo .floating-btns.is-top {
+.floating-btns.is-top {
   opacity: 0;
   transform: translateY(100%);
 }
