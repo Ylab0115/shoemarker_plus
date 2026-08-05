@@ -398,6 +398,16 @@
                     <img loading="lazy" class="best-hot__nav-logo" src="../../assets/images/main/logo_converse_mo.png" alt="Converse">
                   </button>
                 </li>
+                <li class="best-hot__nav-item is-active">
+                  <button class="best-hot__nav-btn" type="button" data-brand="nike">
+                    <img loading="lazy" class="best-hot__nav-logo" src="../../assets/images/main/logo_nike_mo.png" alt="Nike">
+                  </button>
+                </li>
+                <li class="best-hot__nav-item">
+                  <button class="best-hot__nav-btn" type="button" data-brand="adidas">
+                    <img loading="lazy" class="best-hot__nav-logo" src="../../assets/images/main/logo_adidas_mo.png" alt="Adidas">
+                  </button>
+                </li>
               </ul>
             </div>
 
@@ -477,6 +487,33 @@
                     </div>
                     <div class="best-hot__card-body">
                       <strong class="best-hot__card-slogan">JUST <br>DO IT.</strong>
+                      <a class="best-hot__card-link" href="#" aria-label="브랜드 홈으로 이동">
+                        브랜드 홈으로 이동
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li class="best-hot__slide-item swiper-slide" data-brand="nike">
+                  <div class="best-hot__card">
+                    <div class="best-hot__card-thumb">
+                      <img loading="lazy" class="best-hot__card-img" src="../../assets/images/main/img_best_brand_01.png" alt="Nike">
+                    </div>
+                    <div class="best-hot__card-body">
+                      <strong class="best-hot__card-slogan">JUST <br>DO IT.</strong>
+                      <a class="best-hot__card-link" href="#" aria-label="브랜드 홈으로 이동">
+                        브랜드 홈으로 이동
+                      </a>
+                    </div>
+                  </div>
+                </li>
+                <li class="best-hot__slide-item swiper-slide" data-brand="adidas">
+                  <div class="best-hot__card">
+                    <div class="best-hot__card-thumb">
+                      <img loading="lazy" class="best-hot__card-img" src="../../assets/images/main/img_best_brand_01.png" alt="Adidas">
+                    </div>
+                    <!-- 슬로건 문구 없는 경우 -->
+                    <div class="best-hot__card-body best-hot__card-body--no-slogan">
+                      <!-- <strong class="best-hot__card-slogan">JUST <br>DO IT.</strong> -->
                       <a class="best-hot__card-link" href="#" aria-label="브랜드 홈으로 이동">
                         브랜드 홈으로 이동
                       </a>
@@ -1282,6 +1319,11 @@
         // 브랜드 슬라이드
         const bestHotEl = document.querySelector('.best-hot__slider');
         if (bestHotEl) {
+          const bestHot = bestHotEl.closest('.best-hot');
+          const brandNavList = bestHot.querySelector('.best-hot__nav-list');
+          const navItems = bestHot.querySelectorAll('.best-hot__nav-item');
+          const navBtns = bestHot.querySelectorAll('.best-hot__nav-btn');
+
           const brandSwiper = new Swiper(bestHotEl, {
             loop: false,
             speed: 400,
@@ -1290,11 +1332,9 @@
             on: {
               slideChange() {
                 syncBrandNav(this.activeIndex);
-              },
-            },
+              }
+            }
           });
-
-          const navBtns = document.querySelectorAll('.best-hot__nav-btn');
           navBtns.forEach(function (btn, index) {
             btn.addEventListener('click', function () {
               brandSwiper.slideTo(index);
@@ -1302,10 +1342,19 @@
           });
 
           function syncBrandNav(activeIndex) {
+            const activeItem = navItems[activeIndex];
+            if (!activeItem || !brandNavList) return;
+            const listRect = brandNavList.getBoundingClientRect();
+            const itemRect = activeItem.getBoundingClientRect();
             document.querySelectorAll('.best-hot__nav-item').forEach(function (item, index) {
               item.classList.toggle('is-active', index === activeIndex);
             });
+            brandNavList.scrollTo({
+              left: brandNavList.scrollLeft + itemRect.left - listRect.left - 24,
+              behavior: 'smooth'
+            });
           }
+          syncBrandNav(brandSwiper.activeIndex);
         }
 
         // 베네핏 슬라이드

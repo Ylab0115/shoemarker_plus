@@ -15615,7 +15615,7 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
 .main .best-hot__nav-list {
   display: flex;
   align-items: center;
-  gap: 80px;
+  gap: 30px;
   width: -moz-max-content;
   width: max-content;
   min-width: 100%;
@@ -15637,7 +15637,7 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   scrollbar-color: #ccc transparent;
 }
 .main .best-hot__nav-item {
-  flex-shrink: 0;
+  /*flex-shrink: 0;*/
   font-size: 0;
 }
 .main .best-hot__nav-item.is-active .best-hot__nav-logo {
@@ -15647,12 +15647,13 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 86px;
-  height: 60px;
+  aspect-ratio: 86/60;
+  /*width: 86px;*/
+  /*height: 60px;*/
   padding: 0;
 }
 .main .best-hot__nav-logo {
-  height: 60px;
+  /*height: 60px;*/
   opacity: 0.5;
 }
 .main .best-hot__slide-item.swiper-slide-active .best-hot__card-slogan,

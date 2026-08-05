@@ -16723,13 +16723,14 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   right: 16px;
 }
 .main .best-hot__nav {
-  margin-bottom: 24px;
+  margin: 0 -24px 24px;
 }
 .main .best-hot__nav-list {
   display: flex;
   align-items: center;
   gap: 24px;
   width: 100%;
+  padding: 0 24px;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: none;
