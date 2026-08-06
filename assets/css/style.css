@@ -18311,6 +18311,7 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   font-weight: 500;
   line-height: 140%;
   letter-spacing: -0.14px;
+  white-space: nowrap;
 }
 @media (max-width: 1024px) {
   .mypage .profile__orders-label {
@@ -18377,6 +18378,11 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
     padding: 16px 12px;
   }
 }
+@media (max-width: 768px) {
+  .mypage .profile__summary-link {
+    padding: 16px 8px;
+  }
+}
 .mypage .profile__summary-link::after {
   content: "";
   width: 16px;
@@ -18400,13 +18406,13 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   font-weight: 600;
   line-height: 140%;
   letter-spacing: -0.14px;
+  white-space: nowrap;
 }
 @media (max-width: 1024px) {
   .mypage .profile__summary-label {
     flex: 1;
     font-weight: 500;
     line-height: 20px;
-    letter-spacing: 0;
   }
 }
 .mypage .profile__summary-label::after {
