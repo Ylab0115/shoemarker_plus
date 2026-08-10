@@ -27,7 +27,9 @@
             <div class="swiper-slide hero-swiper__slide">
               <a href="#" class="hero-swiper__link">
                 <div class="hero-swiper__img-box">
-                  <img src="../../assets/images/main/img_main_01_mo.jpg" alt="">
+                  <video preload="metadata" muted playsinline loop poster="../../assets/images/main/img_main_01_mo.jpg"> <!-- 영상 로딩이 늦어질 경우를 대비해 Poster 사용 -->
+                    <source src="../../assets/images/main/video_mo.mp4" type="video/mp4">
+                  </video>
                 </div>
                 <div class="hero-swiper__txt-box">
                   <strong class="hero-swiper__title">NIKE OF<br> AIR MAX 95</strong>
@@ -1247,6 +1249,31 @@
       });
 
       window.addEventListener('load', function () {
+        // 스크롤 시 메인 슬라이드 영역 dim처리하기
+        const trendSection = document.querySelector('.section--trend');
+        const heroSection = document.querySelector('.section--hero');
+        function updateTrendOpacity() {
+          if (!trendSection) return;
+
+          const rect = trendSection.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+          let progress = (windowHeight - rect.top) / windowHeight;
+
+          progress = progress * 2.25; // 2.25배 빠르게 진행
+          progress = Math.max(0, Math.min(1, progress));
+
+          // 최대 opacity 0.8
+          const opacity = progress * .88; // 최종 dim opacity 값
+
+          heroSection.style.setProperty(
+            '--hero--after-opacity',
+            opacity.toFixed(3)
+          );
+        }
+        window.addEventListener('scroll', updateTrendOpacity, {passive:true});
+        window.addEventListener('resize', updateTrendOpacity);
+        updateTrendOpacity();
+
         // 메인 슬라이드
         // 텍스트 영역에 좌우버튼 및 페이징 영역 만들기
         $('.hero-swiper__slide').each(function () {
@@ -1257,15 +1284,28 @@
             </div>
           `);
         });
+        function playActiveVideo(swiper) {
+          var videos = swiper.el.querySelectorAll('video');
+          videos.forEach(function (video) {
+            video.pause();
+            video.currentTime = 0;
+          });
+          var activeVideo = swiper.slides[swiper.activeIndex].querySelector('video');
+          if (activeVideo) {
+            activeVideo.play().catch(function () {
+              // console.warn('비디오를 자동재생할 수 없습니다.', error);
+            });
+          }
+        }
         // 스와이프 작동하기
         const thumbSwiper = new Swiper('.js-hero-swiper', {
           loop: true,
           spaceBetween: 0,
           slidesPerView: 1,
-          autoplay: {
-            delay: 4000,
-            disableOnInteraction: false,
-          },
+          //autoplay: {
+          //  delay: 4000,
+          //  disableOnInteraction: false,
+          //},
           //pagination: {
           //  el: '.hero-swiper__fraction',
           //  type: 'fraction',
@@ -1282,9 +1322,13 @@
           on: {
             init: function () {
               updatePagination(this);
+              playActiveVideo(this);
             },
             slideChange: function () {
               updatePagination(this);
+            },
+            slideChangeTransitionEnd: function () {
+              playActiveVideo(this);
             }
           },
         });

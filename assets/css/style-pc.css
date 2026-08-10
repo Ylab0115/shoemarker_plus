@@ -15447,7 +15447,8 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   width: 100%;
   padding-top: 100dvh;
 }
-.main .hero-swiper__img-box img {
+.main .hero-swiper__img-box img,
+.main .hero-swiper__img-box video {
   position: absolute;
   left: 0;
   top: 0;
@@ -15455,6 +15456,10 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  pointer-events: none;
+  -moz-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
 }
 .main .hero-swiper__txt-box {
   display: flex;

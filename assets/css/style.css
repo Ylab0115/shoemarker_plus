@@ -16394,6 +16394,19 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   z-index: 0;
   height: 100dvh;
 }
+.main .section--hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  opacity: var(--hero--after-opacity);
+  z-index: 1;
+  pointer-events: none;
+}
 .main .section--trend {
   overflow: visible;
   position: relative;
@@ -16402,20 +16415,20 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   background: url("../images/main/img_sec2_bg_mo.jpg") no-repeat;
   background-size: cover;
   z-index: 1;
-}
-.main .section--trend::before {
-  content: "";
-  position: absolute;
-  top: -60px;
-  left: 0;
-  right: 0;
-  width: 100%;
-  height: 140px;
-  background: #000000;
-  opacity: 0.9;
-  filter: blur(20px);
-  pointer-events: none;
-  z-index: 0;
+  /*&::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 140px;
+    background: $black;
+    opacity: 0.9;
+    filter: blur(20px);
+    pointer-events: none;
+    z-index: 0;
+  }*/
 }
 .main .section--trend .section__desc {
   color: #FFFFFF;
@@ -16499,11 +16512,17 @@ body.home.pc .ai-chat.is-top .ai-chat__trigger::after {
   position: absolute;
   inset: 0;
 }
-.main .hero-swiper__img-box img {
+.main .hero-swiper__img-box img,
+.main .hero-swiper__img-box video {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  object-fit: cover;
+  pointer-events: none;
+  -moz-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
 }
 .main .hero-swiper__txt-box {
   display: flex;

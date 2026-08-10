@@ -38,7 +38,9 @@
             <div class="swiper-slide hero-swiper__slide">
               <a href="#" class="hero-swiper__link">
                 <div class="hero-swiper__img-box">
-                  <img src="../../assets/images/main/img_main_02_pc.jpg" alt="">
+                  <video preload="metadata" muted playsinline loop poster="../../assets/images/main/img_main_02_pc.jpg"> <!-- 영상 로딩이 늦어질 경우를 대비해 Poster 사용 -->
+                    <source src="../../assets/images/main/video_pc.mp4" type="video/mp4">
+                  </video>
                 </div>
                 <div class="hero-swiper__txt-box">
                   <strong class="hero-swiper__title">ABZORB 1890<br> U189071H</strong>
@@ -2039,6 +2041,19 @@
             </div>
           `);
         });
+        function playActiveVideo(swiper) {
+          var videos = swiper.el.querySelectorAll('video');
+          videos.forEach(function (video) {
+            video.pause();
+            video.currentTime = 0;
+          });
+          var activeVideo = swiper.slides[swiper.activeIndex].querySelector('video');
+          if (activeVideo) {
+            activeVideo.play().catch(function () {
+              // console.warn('비디오를 자동재생할 수 없습니다.', error);
+            });
+          }
+        }
         // 스와이프 작동하기
         const mainSwiper = new Swiper('.js-hero-swiper', {
           loop: true,
@@ -2059,9 +2074,13 @@
           on: {
             init: function () {
               updatePagination(this);
+              playActiveVideo(this);
             },
             slideChange: function () {
               updatePagination(this);
+            },
+            slideChangeTransitionEnd: function () {
+              playActiveVideo(this);
             }
           },
         });
