@@ -11660,6 +11660,7 @@ img, video, canvas, svg {
 .nav__depth2 > li > a {
   position: relative;
   display: block;
+  width: 120px;
   padding-right: 50px;
   color: #717171;
   font-size: 18px;
