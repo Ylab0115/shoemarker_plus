@@ -911,6 +911,57 @@ let UI = {
       }
     }
 
+    // 3뎁스+4뎁스메뉴 2열 종대로 배열하기 (absolute 좌표 만들기)
+    function layoutDepth3(list) {
+      const width = list.clientWidth;
+      if (!width) return;
+
+      const columnGap = 16;
+      const rowGap = 24;
+      const columnWidth = (width - columnGap) / 2;
+      const heights = [0, 0];
+
+      $(list).children('li').each(function (index) {
+        // 1·2번은 좌우 고정, 이후는 높이가 낮은 열 선택
+        const column = index < 2
+          ? index
+          : (heights[0] <= heights[1] ? 0 : 1);
+
+        this.style.width = `${columnWidth}px`;
+        this.style.left = `${column * (columnWidth + columnGap)}px`;
+        this.style.top = `${heights[column]}px`;
+
+        heights[column] +=
+          this.getBoundingClientRect().height + rowGap;
+      });
+
+      list.style.height =
+        `${Math.max(0, Math.max(...heights) - rowGap)}px`;
+    }
+
+    setTimeout(function () { // aJax 로딩 문제로 약간의 딜레이를 줌.
+      $('.nav__depth3').each(function () {
+        const list = this;
+
+        // 중복 초기화 방지
+        if ($(list).data('depth3Layout')) return;
+
+        const observer = new ResizeObserver(function () {
+          layoutDepth3(list);
+        });
+
+        observer.observe(list);
+
+        $(list).children('li').each(function () {
+          observer.observe(this);
+        });
+
+        $(list).data('depth3Layout', observer);
+
+        layoutDepth3(list);
+      });
+    }, 100);
+
     $(window).on('scroll', function () {
       if (!pcOnly()) return;
       if (isNavOpen()) {
@@ -1001,14 +1052,77 @@ let UI = {
     });
 
     // 1depth 카테고리 전환
-    $(document).on('click', '.mobile-gnb__depth1-item a', function () {
+    /*$(document).on('click', '.mobile-gnb__depth1-item a', function () {
       const $item = $(this).closest('.mobile-gnb__depth1-item');
       const category = $item.data('category');
       $('.mobile-gnb__depth1-item').removeClass('is-active');
       $item.addClass('is-active');
       $('.mobile-gnb__panel').removeClass('is-active');
       $(`.mobile-gnb__panel[data-panel="${category}"]`).addClass('is-active');
-    });
+    });*/
+    //MobileGnb 카테고리 전환
+    setTimeout(function () { // aJax 로딩 문제로 약간의 딜레이를 줌.
+      const selector =
+      '.mobile-gnb__depth1 > .mobile-gnb__depth1-item:not(.utilmn) a';
+
+      const $items = $('.mobile-gnb__depth1')
+        .children('.mobile-gnb__depth1-item')
+        .not('.utilmn');
+
+      $items.find('ul').hide();
+      $items.add($items.find('li')).removeClass('is-active');
+
+      $items.find('li > a').add($items.children('a')).each(function () {
+        const $link = $(this);
+        const hasSubmenu = $link.next('ul').length > 0;
+
+        $link.toggleClass('no-submenu', !hasSubmenu);
+
+        if (hasSubmenu) {
+          $link.attr('aria-expanded', 'false');
+        }
+      });
+
+      $(document)
+        .off('click.mobileMenu')
+        .on('click.mobileMenu', selector, function (e) {
+          const $link = $(this);
+          const $li = $link.parent('li');
+          const $submenu = $link.next('ul');
+
+          // utilmn을 제외한 같은 뎁스의 다른 메뉴 초기화
+          const $siblings = $li.siblings('li').not('.utilmn');
+
+          $siblings
+            .find('.is-active')
+            .addBack('.is-active')
+            .removeClass('is-active');
+
+          $siblings.find('a[aria-expanded]')
+            .attr('aria-expanded', 'false');
+
+          $siblings.find('ul ul').stop(true, true).hide();
+          $siblings.children('ul').stop(true, true).slideUp(200);
+
+          // 하위 메뉴가 없으면 링크 이동만 실행
+          if (!$submenu.length) return;
+
+          e.preventDefault();
+
+          const isOpen = !$li.hasClass('is-active');
+
+          $li.toggleClass('is-active', isOpen);
+          $link.attr('aria-expanded', String(isOpen));
+
+          $submenu.stop(true, true);
+
+          if (isOpen) {
+            $submenu.slideDown(200);
+          } else {
+            $submenu.slideUp(200);
+          }
+        });
+    }, 250);
   },
   goTop: function () {
     const $btn    = $('#goTop');
